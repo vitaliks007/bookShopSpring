@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/book.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" href="/static/css/book.css" th:href="@{/css/book.css}" />
+    <title>Каталог</title>
+</head>
+<body>
+    <header>
+        <img src="/resources/icon.png" width="3%" alt="">
+        <div>
+            <ul>
+                <li>
+                    <a href="/">
+                        <p>Главная</p>
+                        <p class="hidden">Главная</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/catalog">
+                        <p>Каталог</p>
+                        <p class="hidden">Каталог</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/private/cart">
+                        <p>Корзина</p>
+                        <p class="hidden">Корзина</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/auth/logout">
+                        <p>Выйти</p>
+                        <p class="hidden">Выйти</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAnonymous()">
+                    <a href="/auth/login">
+                        <p>Авторизация</p>
+                        <p class="hidden">Авторизация</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <div id="book-store">
+            <img src="/resources/icon.png" th:src="${book.icon}" alt="Картинка">
+            <div>
+                <h1 th:text="${book.name}">Название книги</h1>
+                <h2 th:text="${book.author.name}">Автор</h2>
+                <p id="book-desc" th:text="${book.description}">Описание</p>
+                <p id="book-cost" th:text="'Цена: ' + ${book.cost} + ' Руб'">Цена</p>
+                <form sec:authorize="isAuthenticated()" method="post" 
+                th:action="@{/public/book/addBookOrder(bookId = ${book.id})}">
+                    <input type="submit" id="add-cart" value="Добавить в корзину">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>2022c student Mirea ALL RIGHTS RESERVED</p>
+    </footer>
+</body>
+</html>

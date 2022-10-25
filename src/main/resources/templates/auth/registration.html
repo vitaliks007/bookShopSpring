@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/auth.css" th:href="@{/css/auth.css}" />
+    <link rel="stylesheet" type="text/css" href="/static/css/reg.css" th:href="@{/css/reg.css}" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}" />
+    <title>Авторизация</title>
+</head>
+
+<body>
+    <header>
+        <img src="/resources/icon.png" width="3%" alt="">
+        <div>
+            <ul>
+                <li>
+                    <a href="/">
+                        <p>Главная</p>
+                        <p class="hidden">Главная</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/catalog">
+                        <p>Каталог</p>
+                        <p class="hidden">Каталог</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/private/cart">
+                        <p>Корзина</p>
+                        <p class="hidden">Корзина</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/auth/logout">
+                        <p>Выйти</p>
+                        <p class="hidden">Выйти</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAnonymous()">
+                    <a href="/auth/login">
+                        <p>Авторизация</p>
+                        <p class="hidden">Авторизация</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <div class="reg">
+            <form class="reg-form" method="post" th:action="@{/auth/registration}">
+                <div class="reg-row">
+                    <p class="reg-label">Логин</p>
+                    <input class="text" type="text" placeholder="Логин" 
+                    th:classappend="${isCorrectUsername} == false ? reg-input-error : null" 
+                    th:value="${username}" th:name="username" />
+                    <p class="reg-error" th:if="${isCorrectUsername} == false">Данный логин уже существует!</p>
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Имя</p>
+                    <input class="text" type="text" placeholder="Имя" th:value="${name}" th:name="name" />
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Фамилия</p>
+                    <input class="text" type="text" placeholder="Фамилия" th:value="${surname}" th:name="surname" />
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Год рождения</p>
+                    <input class="text" type="text" placeholder="Год рождения" th:value="${birthday}" th:name="birthday" />
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Электронная почта</p>
+                    <input class="text" type="text" placeholder="Электронная почта" th:value="${email}" th:name="email" />
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Телефон</p>
+                    <input class="text" type="text" placeholder="Телефон" th:value="${phone}" th:name="phone" />
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Пароль</p>
+                    <input class="text" type="password" placeholder="Пароль"
+                    th:classappend="${isCorrectPassword} == false ? reg-input-error : null" th:name="password" />
+                </div>
+                <div class="reg-row">
+                    <p class="reg-label">Подтверждение пароля</p>
+                    <input class="text" type="password" placeholder="Подтверждение пароля"
+                    th:classappend="${isCorrectPassword} == false ? reg-input-error : null" th:name="passwordRepeat" />
+                    <p class="reg-error" th:if="${isCorrectPassword} == false">Пароли не совпадают!</p>
+                </div>
+                <input class="reg-button" type="submit" value="Регистрация">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>2022c student Mirea ALL RIGHTS RESERVED</p>
+    </footer>
+</body>
+</html>

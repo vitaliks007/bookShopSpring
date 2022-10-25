@@ -1,0 +1,35 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth {
+    display: flex;
+    padding: 10px;
+}
+
+.auth form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+.text {
+    height: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    border: 0;
+}
+
+.button {
+    height: 30px;
+    width: 200px;
+}

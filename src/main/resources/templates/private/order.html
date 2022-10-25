@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../css/cart.css"> -->
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" th:href="@{/css/cart.css}" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}" />
+    <title>Корзина</title>
+</head>
+
+<body>
+    <header>
+        <img src="/resources/icon.png" width="3%" alt="">
+        <div>
+            <ul>
+                <li>
+                    <a href="/">
+                        <p>Главная</p>
+                        <p class="hidden">Главная</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/catalog">
+                        <p>Каталог</p>
+                        <p class="hidden">Каталог</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/private/cart">
+                        <p class="selected">Корзина</p>
+                        <p class="hidden">Корзина</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/auth/logout">
+                        <p>Выйти</p>
+                        <p class="hidden">Выйти</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAnonymous()">
+                    <a href="/auth/login">
+                        <p>Авторизация</p>
+                        <p class="hidden">Авторизация</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <div class="order-info">
+            <p th:text="${user.name} + ','"></p>
+            <p>Спасибо, что приобрели наши книги!</p>
+            <!-- <div th:each="bookOrderProduct : ${bookOrderProducts}" class="order-card">
+                <p th:text="${bookOrderProduct.book.author.name}" class="author-name"></p>
+                <p th:text="${bookOrderProduct.book.name}" class="book-name"></p>
+                <p th:text="${bookOrderProduct.count} + 'шт.'" class="cost"></p>                
+            </div> -->
+            <p th:text="${'Статус заказа: ' + bookOrderStatus}"></p>
+            <p th:text="${'Заказ №' + bookOrder.id + ' от ' + #dates.format(bookOrder.date, 'dd-MMM-yyyy')}"></p>
+            <p th:text="${'Информация о заказе отправлена на почту ' + user.email}"></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>2022c student Mirea ALL RIGHTS RESERVED</p>
+    </footer>
+</body>
+</html>

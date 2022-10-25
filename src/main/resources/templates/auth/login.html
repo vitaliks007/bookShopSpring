@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/auth.css" th:href="@{/css/auth.css}" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}" />
+    <title>Авторизация</title>
+</head>
+
+<body>
+    <header>
+        <img src="/resources/icon.png" width="3%" alt="">
+        <div>
+            <ul>
+                <li>
+                    <a href="/">
+                        <p>Главная</p>
+                        <p class="hidden">Главная</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/catalog">
+                        <p>Каталог</p>
+                        <p class="hidden">Каталог</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/private/cart">
+                        <p>Корзина</p>
+                        <p class="hidden">Корзина</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/auth/logout">
+                        <p>Выйти</p>
+                        <p class="hidden">Выйти</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAnonymous()">
+                    <a href="/auth/login">
+                        <p class="selected">Авторизация</p>
+                        <p class="hidden">Авторизация</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <div class="auth">
+            <form th:action="@{/auth/login}" method="post">
+                <input class="text" type="text" placeholder="Имя пользователя" th:name="username" />
+                <input class="text" type="password" placeholder="Пароль" th:name="password" />
+                <fieldset class="buttons">
+                    <input class="button" type="submit" value="Войти">
+                    <a href="/auth/registration"><input class="button" type="button" value="Регистрация"></a>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>2022c student Mirea ALL RIGHTS RESERVED</p>
+    </footer>
+</body>
+</html>

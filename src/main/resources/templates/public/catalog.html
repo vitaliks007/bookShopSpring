@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/catalog.css" th:href="@{/css/catalog.css}">
+    <title>Каталог</title>
+</head>
+<body>
+    <header>
+        <img src="/resources/icon.png" width="3%" alt="">
+        <div>
+            <ul>
+                <li>
+                    <a href="/">
+                        <p>Главная</p>
+                        <p class="hidden">Главная</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/public/catalog">
+                        <p class="selected">Каталог</p>
+                        <p class="hidden">Каталог</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/private/cart">
+                        <p>Корзина</p>
+                        <p class="hidden">Корзина</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/auth/logout">
+                        <p>Выйти</p>
+                        <p class="hidden">Выйти</p>
+                    </a>
+                </li>
+
+                <li sec:authorize="isAnonymous()">
+                    <a href="/auth/login">
+                        <p>Авторизация</p>
+                        <p class="hidden">Авторизация</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <div id="search-form">
+            <form method="get" th:action="@{/public/catalog/getBooks}">
+                <input type="text" id="search" placeholder="Название книги" th:name="bookName">
+                <input type="submit" value="Поиск" id="search-btn">
+            </form>
+        </div>
+
+        <div class="option-list">
+            <div class="select-list">
+                <div class="select-card">
+                    <select name="genre" id="">
+                        <option value="default" disabled="true" selected="true">Жанры</option>
+                        <option th:each="genre : ${genres}" th:value="${genre.genreName}">
+                            <a th:href="@{/public/}"> <!--TODO-->
+                                <p th:text="${genre.genreNameRus}"></p>
+                            </a>
+                        </option>
+                    </select>
+                </div>
+                <div class="select-card">
+                    <a th:href="@{/public/}">Новинки</a>
+                </div>
+                <div class="select-card">
+                    <a th:href="@{/public/}">Скидки</a>
+                </div>
+            </div>
+            <div class="sort-card">
+                <p>Сортировать по:</p>
+                <select name="sort" id="">
+                    <option value="cost-up">Цена вверх</option>
+                    <option value="cost-down">Цена вниз</option>
+                </select>
+            </div>
+        </div>
+        
+
+        <div id="book-list">
+            <div th:each="book : ${books}" class="book-card">
+                <img th:src="${book.icon}" alt="Картинка">
+                <h1 th:text="${book.name}"></h1>
+                <h2 th:text="${book.author.name}"></h2>
+                <p th:text="${book.description}"></p>
+                <a th:href="@{/public/book(bookId = ${book.id})}"><button th:text="${book.cost} + ' Руб'"></button></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>2022c student Mirea ALL RIGHTS RESERVED</p>
+    </footer>
+</body>
+</html></html>

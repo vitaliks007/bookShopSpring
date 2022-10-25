@@ -1,0 +1,67 @@
+section {
+    overflow-y: auto;
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.order-card {
+    display: flex;
+    flex-direction: row;
+    background-color: azure;
+    padding: 10px;
+    justify-content: start;
+    align-items: center;
+}
+
+.book-icon {
+    width: 2%;
+}
+
+.author-name {
+    width: 25%;
+}
+
+.book-name {
+    width: 50%;
+}
+
+.cost {
+    width: 15%;
+}
+
+.order-card form {
+    width: 10%;
+    height: 30px;
+}
+
+.order-card input {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 0;
+    background-color: rgba(127, 255, 212, 0.525);
+}
+
+.sell {
+    cursor: pointer;
+    width: 100%;
+    height: 5vh;
+    border: 0;
+    background-color: rgba(127, 255, 212, 0.525);
+}
+
+.order-card input:hover {
+    background-color: rgb(127, 255, 212);
+}
