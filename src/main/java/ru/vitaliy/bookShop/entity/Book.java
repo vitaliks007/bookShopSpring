@@ -37,6 +37,8 @@ public class Book {
     private Set<Genre> genres;
 
     private int cost;
+
+    private int discount;
     
     private String description;
 

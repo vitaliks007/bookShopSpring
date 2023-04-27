@@ -23,6 +23,9 @@ public interface BookService {
 
     List<Book> getBooksByCost();
 
+    List<Book> getBooksOrderByCostAsc();
+    List<Book> getBooksOrderByCostDesc();
+
     List<Book> getBooksByCount();
 
 //    List<Book> getSixMonthOlderBooksByDate();
@@ -31,4 +34,7 @@ public interface BookService {
 
     String getBookDescriptionById(int id);
 
+    List<Book> getNewBooks();
+
+    List<Book> getDiscountBook();
 }

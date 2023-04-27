@@ -92,6 +92,18 @@ section {
     border: 0;
     background-color: rgba(127, 255, 212, 0.525);
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.book-card button * {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: fit-content;
+    margin: 5px;
 }
 
 .book-card button:hover {
@@ -136,6 +148,6 @@ section {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    width: 20%;
+    justify-content: flex-start;
+    width: 30%;
 }

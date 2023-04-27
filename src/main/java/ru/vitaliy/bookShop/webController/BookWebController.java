@@ -52,7 +52,7 @@ public class BookWebController {
             bookOrderProduct.setBookOrderId(bookOrder.getId());
             bookOrderProduct.setBook(book);
             bookOrderProduct.setBookId(bookId);
-            bookOrderProduct.setCost(book.getCost());
+            bookOrderProduct.setCost(Math.round(book.getCost() - book.getCost() * book.getDiscount()));
             bookOrderProduct.setCount(1);
         } else {
             bookOrderProduct.setCount(bookOrderProduct.getCount() + 1);

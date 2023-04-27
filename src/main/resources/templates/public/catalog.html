@@ -64,30 +64,31 @@
 
         <div class="option-list">
             <div class="select-list">
-                <div class="select-card">
+                <!-- <div class="select-card">
                     <select name="genre" id="">
                         <option value="default" disabled="true" selected="true">Жанры</option>
                         <option th:each="genre : ${genres}" th:value="${genre.genreName}">
-                            <a th:href="@{/public/}"> <!--TODO-->
+                            <a th:href="@{/public/}"> 
                                 <p th:text="${genre.genreNameRus}"></p>
                             </a>
                         </option>
                     </select>
+                </div> -->
+                <div class="select-card">
+                    <a th:href="@{/public/catalog/getNewBooks}">Новинки</a>
                 </div>
                 <div class="select-card">
-                    <a th:href="@{/public/}">Новинки</a>
-                </div>
-                <div class="select-card">
-                    <a th:href="@{/public/}">Скидки</a>
+                    <a th:href="@{/public/catalog/getDiscountBooks}">Скидки</a>
                 </div>
             </div>
-            <div class="sort-card">
+            <form th:action="@{/public/catalog/getSortedBooks}" method="get" class="sort-card">
                 <p>Сортировать по:</p>
-                <select name="sort" id="">
-                    <option value="cost-up">Цена вверх</option>
-                    <option value="cost-down">Цена вниз</option>
+                <select th:name="sortType" id="">
+                    <option th:name="costAsc" value="costAsc">Цена вверх</option>
+                    <option th:name="costDesc" value="costDesc">Цена вниз</option>
                 </select>
-            </div>
+                <input type="submit" value="Отсортировать">
+            </form>
         </div>
         
 
@@ -97,7 +98,15 @@
                 <h1 th:text="${book.name}"></h1>
                 <h2 th:text="${book.author.name}"></h2>
                 <p th:text="${book.description}"></p>
-                <a th:href="@{/public/book(bookId = ${book.id})}"><button th:text="${book.cost} + ' Руб'"></button></a>
+                <a th:href="@{/public/book(bookId = ${book.id})}">
+                    <!-- <button th:text="${book.cost - book.cost * book.discount/100} + ' Руб'">
+                        <strike th:if="${book.discount > 0}" th:text="${book.cost}"></strike>
+                    </button> -->
+                    <button>
+                        <strike th:if="${book.discount > 0}" th:text="${book.cost}"></strike>
+                        <p th:text="${book.cost - book.cost * book.discount/100} + ' Руб'"></p>
+                    </button>
+                </a>
             </div>
         </div>
     </section>

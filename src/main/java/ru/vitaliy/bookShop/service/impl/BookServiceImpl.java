@@ -5,14 +5,12 @@ import ru.vitaliy.bookShop.dao.BookDao;
 import ru.vitaliy.bookShop.dao.BookOrderDao;
 import ru.vitaliy.bookShop.dao.BookRequestDao;
 import ru.vitaliy.bookShop.entity.Book;
-import ru.vitaliy.bookShop.entity.BookOrder;
 import ru.vitaliy.bookShop.entity.BookRequest;
 import ru.vitaliy.bookShop.service.BookService;
 
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -94,6 +92,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> getBooksOrderByCostAsc() {
+        return bookDao.findByOrderByCostAsc().get();
+    }
+
+    @Override
+    public List<Book> getBooksOrderByCostDesc() {
+        return bookDao.findByOrderByCostDesc().get();
+    }
+
+    @Override
     public List<Book> getBooksByCount() {
         return bookDao.findAll().stream()
                 .sorted(Comparator.comparing(Book::getCount))
@@ -152,5 +160,15 @@ public class BookServiceImpl implements BookService {
         nowCalendar.setTime(Date.from(Instant.now()));
         bookOrderCalendar.add(Calendar.MONTH, 6);
         return nowCalendar.after(bookOrderCalendar);
+    }
+
+    @Override
+    public List<Book> getNewBooks() {
+        return bookDao.findTop12ByOrderByPublishDateDesc().get();
+    }
+
+    @Override
+    public List<Book> getDiscountBook() {
+        return bookDao.findByDiscountGreaterThanOrderByDiscountDesc(0).get();
     }
 }
