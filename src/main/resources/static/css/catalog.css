@@ -47,7 +47,7 @@ section {
 
 .book-card {
     display: flex;
-    height: 90%;
+    height: 80%;
     width: 22%;
     background-color: azure;
     flex-direction: column;

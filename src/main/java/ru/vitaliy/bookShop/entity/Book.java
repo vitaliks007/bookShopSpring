@@ -1,6 +1,7 @@
 package ru.vitaliy.bookShop.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,6 +34,7 @@ public class Book {
 
     private int count;
 
+//    @JsonManagedReference
     @ManyToMany(mappedBy = "books")
     private Set<Genre> genres;
 

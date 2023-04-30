@@ -1,5 +1,6 @@
 package ru.vitaliy.bookShop.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class Genre {
 
     private String genreNameRus;
 
+//    @JsonBackReference
     @ManyToMany
     private Set<Book> books;
 }
